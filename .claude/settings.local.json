@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -c ':*)",
+      "Bash(pyinstaller --onefile --windowed --icon=letter-c.ico --name=code_review code_review.py)",
+      "Bash(pyinstaller code_review.spec)",
+      "Bash(taskkill /f /im code_review.exe)",
+      "Bash(taskkill /F /IM code_review.exe)",
+      "Bash(cmd /c \"taskkill /F /IM code_review.exe\")",
+      "Bash(cmd /c \"taskkill /F /IM apictl_generator.exe\")",
+      "Bash(pyinstaller apictl_generator.spec)"
+    ]
+  }
+}
