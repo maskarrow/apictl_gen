@@ -132,17 +132,17 @@ class ApiCtlGenerator:
             row_frame = tk.Frame(card, bg=BG_ELEVATED)
             row_frame.grid(row=i * 2, column=0, columnspan=2, sticky="ew",
                            padx=16, pady=(12, 12))
+            row_frame.columnconfigure(0, minsize=120)
             row_frame.columnconfigure(1, weight=1)
 
             # label + flag hint stacked
-            lbl_frame = tk.Frame(row_frame, bg=BG_ELEVATED, width=110)
-            lbl_frame.pack_propagate(False)
-            lbl_frame.grid(row=0, column=0, sticky="w", padx=(0, 14))
+            lbl_frame = tk.Frame(row_frame, bg=BG_ELEVATED)
+            lbl_frame.grid(row=0, column=0, sticky="nw", padx=(0, 14), pady=(2, 0))
 
-            tk.Label(lbl_frame, text=label, bg=BG_ELEVATED, fg=FG_MUTED,
-                     font=("Segoe UI", 9), anchor="w").pack(anchor="w")
+            tk.Label(lbl_frame, text=label, bg=BG_ELEVATED, fg=FG_PRIMARY,
+                     font=("Segoe UI", 9, "bold"), anchor="w").grid(row=0, column=0, sticky="w")
             tk.Label(lbl_frame, text=flag, bg=BG_ELEVATED,
-                     fg="#5F6B7C", font=("Consolas", 8), anchor="w").pack(anchor="w")
+                     fg="#8FA3C0", font=("Consolas", 8), anchor="w").grid(row=1, column=0, sticky="w", pady=(2, 0))
 
             var = tk.StringVar(value=default)
             border_frame, _ = make_border_entry(row_frame, var)
@@ -274,9 +274,12 @@ def _resource(filename):
 
 
 if __name__ == "__main__":
+    if sys.platform == "win32":
+        import ctypes
+        ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID("phoenixgroup.apictl.generator")
     root = tk.Tk()
     _ico = _resource("letter-a.ico")
     if os.path.exists(_ico):
-        root.iconbitmap(_ico)          # .ico → title bar + taskbar on Windows
+        root.iconbitmap(default=_ico)
     app = ApiCtlGenerator(root)
     root.mainloop()

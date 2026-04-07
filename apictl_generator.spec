@@ -22,7 +22,7 @@ exe = EXE(
     a.binaries,
     a.datas,
     [],
-    name='apictl_generator',
+    name='apictl_gen',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
